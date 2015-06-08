@@ -1,0 +1,636 @@
+#:kivy 1.7.1
+        
+[EntradaDeTexto@TextInput]:
+    hint_text: ctx.text if 'text' in ctx else ''
+    foreground_color: (75./255.,150./255.,148./255.,1.)
+    font_size: '18sp'
+    valign: 'middle'
+    halign: 'center'
+    text_valign: 'middle'
+    select_all: True
+    multiline: False
+
+[CuadroUno@Button]:
+    text: ctx.text if 'text' in ctx else ''
+    color: 1,1,1,1  # Color de texto
+    font_size: '18sp'
+    text_size: self.width, None
+    valign: 'middle'
+    halign: 'center'
+    background_normal: 'atlas://images/myatlas/label'
+    background_down: 'atlas://images/myatlas/label'
+    size: self.size
+    border: (1,1,1,1)
+
+[CuadroDos@Button]:
+    text: ctx.text if 'text' in ctx else ''
+    color: 1,1,1,1
+    font_size: '16sp'
+    text_size: self.width - 2.5, None
+    valign: 'middle'
+    halign: 'center'
+    background_normal: 'atlas://images/myatlas/label'
+    background_down: 'atlas://images/myatlas/label'
+    size: self.size
+    border: (1,0.1,1,1)
+
+[CuadroTres@Button]:
+    text: ctx.text if 'text' in ctx else ''
+    color: 1,1,1,1
+    font_size: '14sp'
+    text_size: self.width - 2.5, None
+    valign: 'middle'
+    halign: 'center'
+    background_normal: 'atlas://images/myatlas/label'
+    background_down: 'atlas://images/myatlas/label'
+    size: self.size
+    border: (1,1,1,1)
+
+[Botones@Button]:
+    text: ctx.text if 'text' in ctx else ''
+    color: 1,1,1,1
+    font_size: '20sp'
+    text_size: self.width, None
+    valign: 'middle'
+    halign: 'center'
+    on_release: ctx.funcion()
+    background_normal: 'atlas://images/myatlas/boton'
+    background_down: 'atlas://images/myatlas/boton_down'
+    size: self.size
+    border: (1,1,1,1)
+
+[EntradaDeTextoDos@TextInput]:
+    hint_text: ctx.text if 'text' in ctx else ''
+    foreground_color: (75./255.,150./255.,148./255.,1.)
+    font_size: '12sp'
+    valign: 'middle'
+    halign: 'center'
+    text_valign: 'middle'
+    select_all: True
+    multiline: False
+
+
+<Pestanas>:
+    size_hint: 1, 1
+    do_default_tab: False
+
+    TabbedPanelItem:
+        text: 'Calcule'
+        font_size: '20sp'
+        CajaUnoUno:
+   
+    TabbedPanelItem:
+        text: 'Escuche'
+        font_size: '20sp'
+        Escuchalo:
+
+    TabbedPanelItem:
+        text: 'Prevenga'
+        font_size: '20sp'
+        Protegete:
+
+<ListaNumeros>:
+    canvas.before:
+        Color:
+            rgba: 20/255., 20/255., 20/255., 1
+        Rectangle:
+            size: self.size
+            pos: self.pos 
+        Color:
+            rgba: 1, 1, 1, 1
+        BorderImage:
+            source: 'images/borde_tabla.png'
+            border: 3,3,3,3
+            size: self.size
+            pos: self.pos
+    font_size: '16sp'
+    text_size: self.width, None
+    valign: 'middle'
+    halign: 'center'
+    color: 1,1,1,1
+
+#________________________________________________________________________________________________________________________#
+<CajaUnoUno>:
+    canvas.before:
+        Color:
+            rgb: 0.5, 0.5, 0.5, 1
+        Rectangle:
+            source: 'images/fondo.jpg'
+            size: self.size
+    
+    textinput_edad: age
+    spinner: sex
+    textinput_fractil: fract
+    textinput_tiempo_exposicion: t_exposicion
+    textinput_nivel_equivalente: n_equivalente
+    list_wrapper: listwrapper
+    imagen:grafica
+
+    BoxLayout:
+
+        BoxLayout:
+            padding: [0,0,0,0]
+            spacing: 0
+
+            BoxLayout:
+                orientation: 'vertical'
+                size_hint: 0.7,1
+                spacing: 1.25
+                padding: [10,10,0,0]
+
+                BoxLayout:
+                    orientation: 'horizontal'
+                    size_hint: 1,0.2
+
+                    BoxLayout:
+                        padding: [5,0,2.5,0]
+                        orientation: 'horizontal'
+                        spacing: 1.25
+                        size_hint: 0.4,1
+                    
+                        GridLayout:
+                            size_hint: 0.4,1
+                            rows: 3
+                            cols: 2
+
+                            CuadroUno:
+                                text: 'Edad:'
+
+                            EntradaDeTexto:
+                                id: age
+                                text: '19-80'
+                                hint_text_color: (104/255.,104/255.,99/255.,1.)
+
+                            CuadroUno:
+                                text: 'Sexo:'
+
+                            Spinner:
+                                id: sex
+                                text: 'F'
+                                font_size: '18sp'
+                                values: 'M','F'
+
+                            CuadroUno:
+                                text: 'Fráctil:'
+
+                            EntradaDeTexto:
+                                id: fract
+                                text: '0.95-0.05'
+                                hint_text_color: (104/255.,104/255.,99/255.,1.)
+
+
+                    BoxLayout:
+                        padding: [0,0,0,0]
+                        orientation: 'horizontal'
+                        spacing: 1.25
+                        size_hint: 0.6,1
+
+
+                        GridLayout:
+                            cols: 2
+                            rows: 2
+                                       
+                            CuadroDos:
+                                text: 'Tiempo de Exposición (Años):'
+
+                            EntradaDeTexto:
+                                id: t_exposicion
+                                text: '1-60'
+                                hint_text_color: (104/255.,104/255.,99/255.,1.)
+
+                            CuadroDos:
+                                text: 'Nivel de Exposición (dB):'
+
+                            EntradaDeTexto:
+                                id: n_equivalente
+                                text: '75-100'
+                                hint_text_color: (104/255.,104/255.,99/255.,1.)
+
+                BoxLayout:
+                    orientation: 'horizontal'
+                    padding: [5,0,0,0]
+                    spacing: 1.25
+                    size_hint: 1,0.1
+
+                    Botones:
+                        size_hint: 0.5,1
+                        text: "Calcular"
+                        funcion: root.calcular
+                        
+                    Botones:
+                        id: limpie
+                        size_hint: 0.5,1
+                        text: 'Limpiar'
+                        funcion: root.limpiar
+                        
+
+
+                BoxLayout:
+                    orientation: 'vertical'
+                    padding: [5,0,0,10]
+                    size_hint: 1,0.65
+
+                    Image:
+                        id: grafica
+                        source: 'images/bienvenido.jpg'
+
+                    BoxLayout:
+                        padding: 0
+                        size_hint: 1,0.05
+                        Label:
+                            text: 'Copyright <C> 2013,  David Manuel Buitrago Montañez'
+                            font_size: "12sp"
+
+            BoxLayout:
+                orientation:'vertical'
+                size_hint: 0.3,1
+                padding: [5,10,10,10]
+               
+
+                BoxLayout:
+                    orientation: 'horizontal'
+                    size_hint: 1,0.1
+                    spacing: 1
+
+                    CuadroTres:
+                        text:'Frec.(Hz)'
+                    CuadroTres:
+                        text:'H\''
+                    CuadroTres:
+                        text:'H'
+
+
+                BoxLayout:
+                    id: listwrapper
+                    padding: [0,1,0,0]
+                    size_hint: 1,0.9
+
+
+#____________________________________________________________________________________________________________________________________________________#
+
+<LoadButton>:
+    BoxLayout:
+        orientation: 'vertical'
+        BoxLayout:
+            size_hint_y: 1
+            height: self.height
+            Button:
+                text: 'Seleccionar un Audio'
+                on_release: root.show_load()
+                background_normal: 'atlas://images/myatlas/boton'
+                background_down: 'atlas://images/myatlas/boton_down'
+                color: 1,1,1,1
+                font_size: '20sp'
+                text_size: self.width, None
+                valign: 'middle'
+                halign: 'center'
+                size: self.size
+                border: (1,1,1,1)
+
+<LoadDialog>:
+    BoxLayout:
+        size: root.size
+        pos: root.pos
+        orientation: "vertical"
+        FileChooserListView:
+            id: filechooser
+            path: 'audios/'
+            filters: ['*.wav']
+
+        BoxLayout:
+            size_hint_y: None
+            height: 30
+            Button:
+                text: "Cancelar"
+                on_release: root.cancel()
+                background_normal: 'atlas://images/myatlas/boton'
+                background_down: 'atlas://images/myatlas/boton_down'
+                color: 1,1,1,1
+                font_size: '20sp'
+                text_size: self.width, None
+                valign: 'middle'
+                halign: 'center'
+                size: self.size
+                border: (1,1,1,1)
+
+            Button:
+                text: "Cargar Audio"
+                on_release: root.load(filechooser.path, filechooser.selection)
+                background_normal: 'atlas://images/myatlas/boton'
+                background_down: 'atlas://images/myatlas/boton_down'
+                color: 1,1,1,1
+                font_size: '20sp'
+                text_size: self.width, None
+                valign: 'middle'
+                halign: 'center'
+                size: self.size
+                border: (1,1,1,1)
+
+<Escuchalo>:
+    imagen_waveform: imagen_forma_de_onda
+    imagen_espectro: espectros
+    texto_path_audio: path_audio
+
+    canvas.before:
+        Color:
+            rgb: 0.5, 0.5, 0.5, 1
+        Rectangle:
+            source: 'images/fondo.jpg'
+            size: self.size
+
+    BoxLayout:
+        orientation: 'vertical'
+        
+        BoxLayout:
+            size_hint: 1,0.3
+            padding: [10,10,10,0]
+            orientation: 'horizontal'
+            
+            BoxLayout:
+                orientation: 'vertical'
+                size_hint: 0.4,1
+                canvas.before:
+                    Color:
+                        rgba: 20/255., 20/255., 20/255., 1
+                    Rectangle:
+                        size: self.size
+                        pos: self.pos 
+                    Color:
+                        rgba: 1, 1, 1, 1
+                    BorderImage:
+                        source: 'images/borde_tabla.png'
+                        border: 3,3,3,3
+                        size: self.size
+                        pos: self.pos
+
+                BoxLayout:
+                    size_hint: 1,0.3
+                    LoadButton:
+
+                BoxLayout:
+                    size_hint: 1,0.65
+                    Image:
+                        id: imagen_forma_de_onda
+                        allow_stretch: True
+                        source: 'images/forma_de_onda.png'
+
+                BoxLayout:
+                    size_hint: 1,0.05
+                    Label:
+                        id: path_audio
+                        text: ''
+
+            BoxLayout:
+                orientation: 'vertical'
+                size_hint: 0.3,1
+                canvas.before:
+                    Color:
+                        rgba: 20/255., 20/255., 20/255., 1
+                    Rectangle:
+                        size: self.size
+                        pos: self.pos 
+                    Color:
+                        rgba: 1, 1, 1, 1
+                    BorderImage:
+                        source: 'images/borde_tabla.png'
+                        border: 3,3,3,3
+                        size: self.size
+                        pos: self.pos
+                
+                BoxLayout:
+                    size_hint: 1,0.3
+                    CuadroUno:
+
+                        text: 'AUDIO ORIGINAL'
+
+
+                BoxLayout:
+                    size_hint: 1,0.7
+                    orientation: 'horizontal'
+
+                    Button:
+                        size: self.size
+                        background_normal: 'atlas://images/myatlas/play'
+                        background_down: 'atlas://images/myatlas/play_down'
+                        on_release: root.play_original()
+                    
+                    Button:
+                        size: self.size
+                        background_normal: 'atlas://images/myatlas/pause'
+                        background_down: 'atlas://images/myatlas/pause_down'
+                        on_release: root.pause_original()
+
+                    Button:
+                        size: self.size
+                        background_normal: 'atlas://images/myatlas/stop'
+                        background_down: 'atlas://images/myatlas/stop_down'
+                        on_release: root.stop_original()
+
+
+            BoxLayout:
+                orientation: 'vertical'
+                size_hint: 0.3,1
+                canvas.before:
+                    Color:
+                        rgba: 20/255., 20/255., 20/255., 1
+                    Rectangle:
+                        size: self.size
+                        pos: self.pos 
+                    Color:
+                        rgba: 1, 1, 1, 1
+                    BorderImage:
+                        source: 'images/borde_tabla.png'
+                        border: 3,3,3,3
+                        size: self.size
+                        pos: self.pos
+                
+                BoxLayout:
+                    size_hint: 1,0.3
+                    CuadroUno:
+                        text: 'AUDIO FILTRADO'
+
+                BoxLayout:
+                    size_hint: 1,0.7
+                    orientation: 'horizontal'
+
+                    Button:
+                        size: self.size
+                        background_normal: 'atlas://images/myatlas/play'
+                        background_down: 'atlas://images/myatlas/play_down'
+                        on_release: root.play_filtrado()
+
+                    Button:
+                        size: self.size
+                        background_normal: 'atlas://images/myatlas/pause'
+                        background_down: 'atlas://images/myatlas/pause_down'
+                        on_release: root.pause_filtrado()
+
+                    Button:
+                        size: self.size
+                        background_normal: 'atlas://images/myatlas/stop'
+                        background_down: 'atlas://images/myatlas/stop_down'
+                        on_release: root.stop_filtrado()
+          
+                        
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint: 1,0.7
+            padding: 10
+            Image:
+                id: espectros
+                source: 'images/espectro_en_zeros.png'   
+
+        BoxLayout:
+            size_hint: 1,0.05
+            Label:
+                text: 'Copyright <C> 2013,  David Manuel Buitrago Montañez'
+                font_size: "12sp"
+#____________________________________________________________________________________________________________________________________________________#
+<Protegete>:
+    list_wrapper:   listwrapper
+    imagen_prt:     grafica_prt
+    imagen_prt_epi: imagen_epi
+    spinner_prt:    selecciona_protector
+
+    sesentaytres: seistres
+    cientoveinticinco: unodoscinco
+    doscientoscincuenta: dosdoblecero
+    quinientos: cincodoblecero
+    mil: unmil
+    dosmil: dostriplecero
+    cuatromil: cuatrotriplecero
+    ochomil: ochotriplecero
+
+    canvas.before:
+        Color:
+            rgb: 0.5, 0.5, 0.5, 1
+        Rectangle:
+            source: 'images/fondo.jpg'
+            size: self.size
+
+    BoxLayout:
+        orientation: 'vertical'
+        size_hint: 0.3,1
+        padding: [10,10,0,10]
+        
+
+        BoxLayout:
+            size_hint: 1,0.1
+            orientation: 'horizontal'
+            spacing: 1
+            CuadroTres:
+                text: 'Frec. (Hz)'
+            CuadroTres:
+                text: 'At. EPI'
+            CuadroTres:
+                text: 'At. Est. H\''
+        
+        BoxLayout:
+            size_hint: 1,0.9
+            id: listwrapper
+
+    BoxLayout:
+        size_hint: 0.7,1
+        orientation: 'horizontal'
+        padding: [5,10,10,10]
+        
+        BoxLayout:
+            orientation: 'vertical'
+            
+            
+            BoxLayout:
+                orientation: 'horizontal'
+                size_hint: 1,0.2
+
+                BoxLayout:
+                    size_hint: 0.25,1
+                    Image:
+                        id: imagen_epi
+                        source: 'images/sk_ld_10.jpg'
+
+                BoxLayout:
+                    orientation: 'vertical'
+                    size_hint: 0.75,1
+                    Spinner:
+                        id: selecciona_protector
+                        font_size: '18sp'
+                        text: 'Seleccione un Protector'
+                        values: 'sk_ld_10','sk_ld_18','sk_ld_26','er_15','er_25','acs_pro_17','tres_m_1100','tres_m_1281','tres_m_1310','tres_m_1430','tres_m_1435','tres_m_1445','tres_m_1455','bilsom_817','bilsom_818','hb_650','hb_5000'
+                    
+                    BoxLayout:
+                        orientation: 'horizontal'
+                        Botones:
+                            text: 'Calcular'
+                            funcion: root.calcular_prt
+                        Botones: 
+                            text: 'Limpiar'
+                            funcion: root.limpiar_prt
+                        Botones:
+                            text: 'Informe XLS'
+                            funcion: root.guardar_informe
+                
+            BoxLayout:
+                orientation: 'vertical'
+                size_hint: 1,0.8
+                padding: 0
+                spacing: 0
+
+                GridLayout:
+                    size_hint: 1, 0.13
+                    rows: 2
+                    cols: 9
+
+                    CuadroTres:
+                        text: 'Frec.' 
+                    CuadroTres:
+                        text: '63' 
+                    CuadroTres:
+                        text: '125' 
+                    CuadroTres:
+                        text: '250'
+                    CuadroTres:
+                        text: '500' 
+                    CuadroTres:
+                        text: '1k' 
+                    CuadroTres:
+                        text: '2k' 
+                    CuadroTres:
+                        text: '4k' 
+                    CuadroTres:
+                        text: '8k' 
+
+                    CuadroTres:
+                        text: 'Atcn.'
+                    EntradaDeTextoDos:
+                        id: seistres
+                        text: '' 
+                    EntradaDeTextoDos:
+                        id: unodoscinco
+                        text: '' 
+                    EntradaDeTextoDos:
+                        id: dosdoblecero
+                        text: '' 
+                    EntradaDeTextoDos:
+                        id: cincodoblecero
+                        text: '' 
+                    EntradaDeTextoDos:
+                        id: unmil
+                        text: '' 
+                    EntradaDeTextoDos:
+                        id: dostriplecero
+                        text: '' 
+                    EntradaDeTextoDos:
+                        id: cuatrotriplecero
+                        text: '' 
+                    EntradaDeTextoDos:
+                        id: ochotriplecero
+                        text: '' 
+                
+                Image:
+                    id: grafica_prt
+                    source: 'images/grafica_protectores.png'
+
+                Label:
+                    size_hint: 1,0.05
+                    text: 'Copyright <C> 2013,  David Manuel Buitrago Montañez'
+                    font_size: "12sp"
