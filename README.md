@@ -15,3 +15,14 @@ pyaudio
 pygame
 
 Se realizará un archivo requierements pronto para facilitar la instalación.
+
+
+# Instalación
+
+apt-get build-dep cython
+apt-get build-dep python-pygame
+apt-get build-dep python-pyaudio
+
+
+apt-get install tk tk-dev
+

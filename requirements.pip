@@ -1,0 +1,10 @@
+Cython==0.21.2
+Kivy==1.9.0
+Pillow==2.8.2
+PyAudio==0.2.8
+matplotlib==1.4.3
+numpy==1.9.2
+pygame==1.9.2a0
+pytz==2015.4
+scipy==0.15.1
+xlwt==1.0.0
