@@ -177,7 +177,7 @@ class CajaUnoUno(FloatLayout):
             (self.atenuacion_h_prima, self.atenuacion_h_prima_widg),
             (self.atenuacion_h, self.atenuacion_h_widg)
         )
-        self.imagen.source = 'images/bienvenido.png'
+        self.imagen.source = os.path.join('images', 'bienvenido.png')
 
     def on_atenuacion_h_prima(self, instance, value):
         for index, labl in enumerate(self.atenuacion_h_prima_widg):
@@ -211,7 +211,7 @@ class CajaUnoUno(FloatLayout):
         resultado = ate_h
 
         graficando_octavas.grafica_octavas(self.atenuacion_h_prima, self.atenuacion_h)
-        self.imagen.source = 'images/H_y_Hprima_octavs.png'
+        self.imagen.source = os.path.join('images', 'H_y_Hprima_octavs.png')
         self.imagen.reload()
 
     def leer_entradas(self):
@@ -387,7 +387,7 @@ class Escuchalo(BoxLayout):
         fs,audio= butter_tercio.leer_audio(self.path)
         audio_filtrado= butter_tercio.leer_audio(os.path.join('audios', 'audio_filtrado', 'filtrado_butter_tercio.wav'))[1]
         self.plotear_espectro(audio,audio_filtrado,fs, os.path.join('images', 'espectros.png'))
-        self.imagen_espectro.source = 'images/espectros.png'
+        self.imagen_espectro.source = os.path.join('images', 'espectros.png')
         self.imagen_espectro.reload()
         global directorio_audio
         directorio_audio = self.path
@@ -453,7 +453,7 @@ class Escuchalo(BoxLayout):
             frame1.axes.get_yaxis().set_visible(False)
             plt.xlim(min(longitud),max(longitud))
             plt.legend(loc='lower left',prop={'size':5})
-            plt.savefig('images/forma_de_onda.png')
+            plt.savefig(os.path.join('images', 'forma_de_onda.png'))
 
         elif len(estereo.shape) == 1:
             canal_l= estereo
@@ -469,7 +469,7 @@ class Escuchalo(BoxLayout):
 
             plt.step(longitud,canal_l,color=rojo)
             plt.xlim(min(longitud),max(longitud))
-            plt.savefig('images/forma_de_onda.png')
+            plt.savefig(os.path.join('images', 'forma_de_onda.png'))
 
     def plotear_espectro(self, y1, y2, Fs, nombre_salida):
         """ Recibe como entrada y = Data de audio sin filtrar.
@@ -652,8 +652,8 @@ class Protegete(BoxLayout):
             (self.atenuacion_protegido, self.atenuacion_protegido_widg)
         )
 
-        self.imagen_prt_epi.source = 'images/protector.png' 
-        self.imagen_prt.source = 'images/protejase.png'
+        self.imagen_prt_epi.source = os.path.join('images', 'protector.png')
+        self.imagen_prt.source = os.path.join('images', 'protejase.png')
         self.spinner_prt.bind(text = self.the_spinner_prt)
         self.protector_usuario = ['','','','','','','','','','','']
         self.sesentaytres.text = ''
@@ -671,9 +671,9 @@ class Protegete(BoxLayout):
             Retorna una imagen que corresponde a la imagen del Protector.
         """
         if self.spinner_prt.text == "Seleccione un Protector":
-            self.imagen_prt_epi.source = 'images/protector.png' 
+            self.imagen_prt_epi.source = os.path.join('images', 'protector.png' )
         else:
-            self.imagen_prt_epi.source = 'images/%s.jpg' % value
+            self.imagen_prt_epi.source = os.path.join('images', '%s.jpg' % value)
             self.imagen_prt_epi.reload()
 
     def on_interpolado_protectores(self, instance, value):
@@ -722,7 +722,7 @@ class Protegete(BoxLayout):
             
         else:
             self.spinner_prt.text = "Protector Personalizado"
-            self.imagen_prt_epi.source = 'images/protector.png' 
+            self.imagen_prt_epi.source = os.path.join('images', 'protector.png' )
             lista_errores = ['','-','-0']
             prot_usuario_numeros = []
             for i,v in enumerate(self.protector_usuario):
@@ -794,7 +794,7 @@ class Protegete(BoxLayout):
                                                             self.atenuacion_h_prt,
                                                             self.interpolado_protectores,
                                                             self.atenuacion_protegido)
-        self.imagen_prt.source = 'images/grafica_protectores.png'
+        self.imagen_prt.source = os.path.join('images', 'grafica_protectores.png')
         self.imagen_prt.reload()
         return self.atenuacion_h_prt, self.atenuacion_h_prima_prt, self.interpolado_protectores, self.atenuacion_protegido
     
@@ -802,8 +802,8 @@ class Protegete(BoxLayout):
     def limpiar_prt(self):
         self.interpolado_protectores = [0,0,0,0,0,0,0,0,0,0,0]
         self.atenuacion_protegido = [0,0,0,0,0,0,0,0,0,0,0]
-        self.imagen_prt_epi.source = 'images/protector.png' 
-        self.imagen_prt.source = 'images/protectores_octavas_clear.png'
+        self.imagen_prt_epi.source = os.path.join('images', 'protector.png' )
+        self.imagen_prt.source = os.path.join('images', 'protectores_octavas_clear.png')
 
         self.sesentaytres.text = ''
         self.cientoveinticinco.text= ''
@@ -986,8 +986,8 @@ class Protegete(BoxLayout):
 
         ancho = 605
         alto = 454
-        imagen = Image.open('images/H_y_Hprima_octavs.png').resize((ancho,alto),Image.ANTIALIAS).convert('RGB').save('images/H_y_Hprima_octavs.bmp')
-        sheet.insert_bitmap('images/H_y_Hprima_octavs.bmp',9,1)
+        imagen = Image.open(os.path.join('images', 'H_y_Hprima_octavs.png')).resize((ancho,alto),Image.ANTIALIAS).convert('RGB').save(os.path.join('images', 'H_y_Hprima_octavs.bmp'))
+        sheet.insert_bitmap(os.path.join('images', 'H_y_Hprima_octavs.bmp'),9,1)
 
         # INFORME ESCÚCHE __________________________________________________________________
         sheet1.write_merge(0,39,0,13,'',estilobg)
@@ -1002,12 +1002,12 @@ class Protegete(BoxLayout):
 
         alto1= 95
         ancho1= 296 + 100
-        imagen1 = Image.open('images/forma_de_onda.png').resize((ancho1,alto1),Image.ANTIALIAS).convert('RGB').save('images/forma_de_onda.bmp')
-        sheet1.insert_bitmap('images/forma_de_onda.bmp',6,3)
+        imagen1 = Image.open(os.path.join('images', 'forma_de_onda.png')).resize((ancho1,alto1),Image.ANTIALIAS).convert('RGB').save(os.path.join('images', 'forma_de_onda.bmp'))
+        sheet1.insert_bitmap(os.path.join('images', 'forma_de_onda.bmp'),6,3)
 
         ancho11= ancho + 165
-        imagen11 = Image.open('images/espectros.png').resize((ancho11,alto),Image.ANTIALIAS).convert('RGB').save('images/espectros.bmp')
-        sheet1.insert_bitmap('images/espectros.bmp',13,1)
+        imagen11 = Image.open(os.path.join('images', 'espectros.png')).resize((ancho11,alto),Image.ANTIALIAS).convert('RGB').save(os.path.join('images', 'espectros.bmp'))
+        sheet1.insert_bitmap(os.path.join('images', 'espectros.bmp') ,13,1)
 
         sheet1.col(0).width = 256*7 # una pulgada
         sheet1.col(1).width = 256*13 # 256 * Nro caracteres
@@ -1054,13 +1054,13 @@ class Protegete(BoxLayout):
         ancho2= 76
         alto2= 76
 
-        imagen2 = Image.open('images/grafica_protectores.png').resize((ancho,alto),Image.ANTIALIAS).convert('RGB').save('images/grafica_protectores.bmp')
-        sheet2.insert_bitmap('images/grafica_protectores.bmp',13,1)
+        imagen2 = Image.open(os.path.join('images', 'grafica_protectores.png')).resize((ancho,alto),Image.ANTIALIAS).convert('RGB').save(os.path.join('images', 'grafica_protectores.bmp'))
+        sheet2.insert_bitmap(os.path.join('images', 'grafica_protectores.bmp'),13,1)
 
         imagen_protector= self.imagen_prt_epi.source
 
-        imagen22 = Image.open(imagen_protector).resize((ancho2,alto2),Image.ANTIALIAS).convert('RGB').save('images/protector_seleccionado.bmp')
-        sheet2.insert_bitmap('images/protector_seleccionado.bmp',9,11)
+        imagen22 = Image.open(imagen_protector).resize((ancho2,alto2),Image.ANTIALIAS).convert('RGB').save(os.path.join('images', 'protector_seleccionado.bmp'))
+        sheet2.insert_bitmap(os.path.join('images', 'protector_seleccionado.bmp') ,9,11)
 
 
         wbk.save('Informe_CEP.xls')
