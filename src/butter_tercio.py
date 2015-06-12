@@ -3,6 +3,7 @@ import math
 import scipy
 import H_prima
 import numpy as np
+import os
 from scipy.io import wavfile
 from scipy.signal import butter, buttord, lfilter
 
@@ -106,6 +107,6 @@ def filtrar(atenuaciones_hp, path_audio):
 	coeficientes = disenar_filtros(mapeo_butterworth)
 	fs, audio = leer_audio(path_audio)
 	audio_filtrado = aplicar_filtros(coeficientes, audio)
-	guardar_audio(audio_filtrado, 'audios/audio_filtrado/filtrado_butter_tercio.wav', fs = 44100)
+	guardar_audio(audio_filtrado, os.path.join('audios', 'audio_filtrado', 'filtrado_butter_tercio.wav'), fs = 44100)
 
 # filtrar(datos, 'audios/03_Barridos_Frecuencia/barrido_Lineal_20Hz-20kHz.wav')
