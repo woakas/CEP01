@@ -87,6 +87,10 @@ import H_prt
 import H_prima_prt
 import butter_tercio
 
+import FileDialog
+from scipy.special import _ufuncs_cxx
+
+
 __author__ = "David Manuel Buitrago Montañez"
 __copyright__ = "Copyright 2013, David Manuel Buitrago Montañez, Trabajo Fin de Máster, Universidad Politécnica de Madrid"
 __credits__ = ["David Manuel Buitrago Montañez", "Alvaro Javier Buitrago Montañez", 
@@ -325,7 +329,7 @@ class CajaUnoUno(FloatLayout):
         self.textinput_nivel_equivalente.text = ''
         self.atenuacion_h_prima = [0,0,0,0,0,0,0,0,0,0]
         self.atenuacion_h = [0,0,0,0,0,0,0,0,0,0]
-        self.imagen.source = 'images/H_y_Hprima_octavs_clear.png'
+        self.imagen.source = os.path.join('images', 'H_y_Hprima_octavs_clear.png')
 
 #_____________________________________ESCUCHE________________________________________________________________________________________________________
 class LoadButton(BoxLayout):
@@ -357,8 +361,8 @@ class Escuchalo(BoxLayout):
         Clock.schedule_once(self.en_carga, 1)
 
     def en_carga(self,instance):    
-        self.imagen_waveform.source = 'images/fondo_forma_onda.png'
-        self.imagen_espectro.source = 'images/escuchelo.png'
+        self.imagen_waveform.source = os.path.join('images', 'fondo_forma_onda.png')
+        self.imagen_espectro.source = os.path.join('images', 'escuchelo.png')
 
     def filtrar_y_graficar_audio(self, instance, value):
         global resultado
@@ -374,15 +378,15 @@ class Escuchalo(BoxLayout):
         butter_tercio.filtrar(self.datos,self.path)
         self.original = Sound(self.path)
         audio_original = self.original
-        self.filtrado = Sound('audios/audio_filtrado/filtrado_butter_tercio.wav')
+        self.filtrado = Sound(os.path.join('audios', 'audio_filtrado', 'filtrado_butter_tercio.wav'))
         
         self.graficando_forma_de_onda()
-        self.imagen_waveform.source = 'images/forma_de_onda.png'
+        self.imagen_waveform.source = os.path.join('images', 'forma_de_onda.png')
         self.imagen_waveform.reload()
         
         fs,audio= butter_tercio.leer_audio(self.path)
-        audio_filtrado= butter_tercio.leer_audio('audios/audio_filtrado/filtrado_butter_tercio.wav')[1]
-        self.plotear_espectro(audio,audio_filtrado,fs,'images/espectros.png')
+        audio_filtrado= butter_tercio.leer_audio(os.path.join('audios', 'audio_filtrado', 'filtrado_butter_tercio.wav'))[1]
+        self.plotear_espectro(audio,audio_filtrado,fs, os.path.join('images', 'espectros.png'))
         self.imagen_espectro.source = 'images/espectros.png'
         self.imagen_espectro.reload()
         global directorio_audio
