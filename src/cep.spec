@@ -4,7 +4,7 @@ import os
 install_hooks(globals())
 
 
-PROJECT_DIR = os.path.join(path.dirname(__file__))
+PROJECT_DIR = os.path.join(os.path.dirname(__file__))
 
 a = Analysis(['main.py'],
              pathex=[PROJECT_DIR],

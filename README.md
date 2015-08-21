@@ -26,3 +26,10 @@ apt-get build-dep python-pyaudio
 
 apt-get install tk tk-dev
 
+
+
+# Ejecutable windows
+Para crear el ejecutable en windows se usa PyInstaller
+
+
+pyinstaller cep.speq
