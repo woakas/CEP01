@@ -4,7 +4,7 @@ import os
 install_hooks(globals())
 
 
-PROJECT_DIR = "C:\\Users\\User\\Desktop\\repositorios\\CEP01\\src"
+PROJECT_DIR = os.path.join(path.dirname(__file__))
 
 a = Analysis(['main.py'],
              pathex=[PROJECT_DIR],

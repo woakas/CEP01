@@ -294,7 +294,7 @@
         orientation: "vertical"
         FileChooserListView:
             id: filechooser
-            path: 'audios/'
+            path: 'audios\\'
             filters: ['*.wav']
 
         BoxLayout:
@@ -410,8 +410,8 @@
 
                     Button:
                         size: self.size
-                        background_normal: 'atlas://images/myatlas/play'
-                        background_down: 'atlas://images/myatlas/play_down'
+                        background_normal: 'images/botones/play.png'
+                        background_down: 'images/botones/play-down.png'
                         on_release: root.play_original()
                     
                     Button:

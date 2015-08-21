@@ -90,6 +90,9 @@ import butter_tercio
 import FileDialog
 from scipy.special import _ufuncs_cxx
 
+from kivy.resources import resource_add_path
+resource_add_path(os.path.join(os.path.dirname(os.path.abspath(__file__)), "images"))
+
 
 __author__ = "David Manuel Buitrago Montañez"
 __copyright__ = "Copyright 2013, David Manuel Buitrago Montañez, Trabajo Fin de Máster, Universidad Politécnica de Madrid"
